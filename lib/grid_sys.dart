@@ -3,6 +3,8 @@
 // Medium≥768px
 // Large≥992px
 // Extra large≥1200px
+// ignore_for_file: unnecessary_getters_setters, must_be_immutable
+
 import 'package:flutter/material.dart';
 
 enum BreakPointEnum { xs, sm, md, lg, xl }
@@ -19,13 +21,17 @@ class BreakPoint {
 
 class GridItem {
   Widget child;
+  List<Widget> _colspans;
+
+  //move to use BreakPoint
   int _xs = 0;
   int _sm = 0;
   int _md = 0;
   int _lg = 0;
   int _xl = 0;
 
-  GridItem({required this.child});
+  GridItem({this.child = const SizedBox(), List<Widget> colspans = const []})
+      : _colspans = colspans;
 
 // get function
   int get xs => _xs;
@@ -33,6 +39,9 @@ class GridItem {
   int get md => _md;
   int get lg => _lg;
   int get xl => _xl;
+
+  // get function colspan
+  List<Widget> get colspans => _colspans;
 
   // set function xs
   set xs(int value) {
@@ -58,12 +67,35 @@ class GridItem {
   set xl(int value) {
     _xl = value;
   }
+
+  // set function colspan
+  set colspan(List<Widget> value) {
+    _colspans = value;
+  }
 }
 
 class GridContrainer extends StatelessWidget {
   List<GridItem> gridSys;
+  double _gapX = 0;
+  double _gapY = 0;
 
   GridContrainer({super.key, required this.gridSys});
+
+  // set function gapX
+  set gapX(double value) {
+    _gapX = value;
+  }
+
+  // set function gapY
+  set gapY(double value) {
+    _gapY = value;
+  }
+
+  //set function gap
+  set gap(double value) {
+    _gapX = value;
+    _gapY = value;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,19 +117,13 @@ class GridContrainer extends StatelessWidget {
 
       totalWidth += widthSizeBox;
       if (totalWidth <= 12) {
-        rows.add(Container(
-          width: (width / 12) * widthSizeBox,
-          child: currentGrid.child,
-        ));
+        rows.add(_buildContainer(width, widthSizeBox, currentGrid));
       } else {
         columns.add(Row(
           children: [...rows],
         ));
         rows.clear();
-        rows.add(Container(
-          width: (width / 12) * widthSizeBox,
-          child: currentGrid.child,
-        ));
+        rows.add(_buildContainer(width, widthSizeBox, currentGrid));
         totalWidth -= 12;
       }
     }
@@ -107,6 +133,26 @@ class GridContrainer extends StatelessWidget {
     ));
 
     return columns;
+  }
+
+  Container _buildContainer(
+      double width, int widthSizeBox, GridItem currentGrid) {
+    return Container(
+      padding: EdgeInsets.only(
+        left: _gapX,
+        right: _gapX,
+        top: _gapY,
+        bottom: _gapY,
+      ),
+      width: (width / 12) * widthSizeBox,
+      child: currentGrid._colspans.isNotEmpty
+          ? Column(
+              children: [
+                ...currentGrid._colspans,
+              ],
+            )
+          : currentGrid.child,
+    );
   }
 
   //function to check size of the screen from grid item return BreakPointEnum

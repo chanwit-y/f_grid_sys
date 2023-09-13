@@ -41,9 +41,42 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: GridContrainer(
         gridSys: [
+          // GridItem(
+          //     child: Container(
+          //   decoration: BoxDecoration(
+          //     color: Colors.greenAccent,
+          //     borderRadius: BorderRadius.circular(5),
+          //   ),
+          //   height: 40,
+          // ))
+          //   ..md = 2
+          //   ..sm = 6
+          //   ..xs = 6,
+          GridItem(colspans: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.orange,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              height: 40,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.pink,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              height: 40,
+            )
+          ])
+            ..md = 2
+            ..sm = 6
+            ..xs = 6,
           GridItem(
               child: Container(
-            color: Colors.greenAccent,
+            decoration: BoxDecoration(
+              color: Colors.blueAccent,
+              borderRadius: BorderRadius.circular(5),
+            ),
             height: 40,
           ))
             ..md = 2
@@ -51,7 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ..xs = 6,
           GridItem(
               child: Container(
-            color: Colors.blueAccent,
+            decoration: BoxDecoration(
+              color: Colors.redAccent,
+              borderRadius: BorderRadius.circular(5),
+            ),
             height: 40,
           ))
             ..md = 2
@@ -59,23 +95,21 @@ class _MyHomePageState extends State<MyHomePage> {
             ..xs = 6,
           GridItem(
               child: Container(
-            color: Colors.redAccent,
+            decoration: BoxDecoration(
+              color: Colors.yellowAccent,
+              borderRadius: BorderRadius.circular(5),
+            ),
             height: 40,
           ))
-            ..md = 2
-            ..sm = 6
-            ..xs = 6,
-          GridItem(
-              child: Container(
-            color: Colors.yellowAccent,
-            height: 40,
-          ))
-            ..md = 1
+            ..md = 6
             ..sm = 6
             ..xs = 12,
           GridItem(
               child: Container(
-            color: Colors.teal,
+            decoration: BoxDecoration(
+              color: Colors.teal,
+              borderRadius: BorderRadius.circular(5),
+            ),
             height: 40,
           ))
             ..md = 1
@@ -83,78 +117,105 @@ class _MyHomePageState extends State<MyHomePage> {
             ..xs = 12,
           GridItem(
               child: Container(
-                color: Colors.purpleAccent,
-                height: 40,
-              ))
-              ..md = 1
-              ..sm = 4
-              ..xs = 12,
+            decoration: BoxDecoration(
+              color: Colors.purpleAccent,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            height: 40,
+          ))
+            ..md = 1
+            ..sm = 4
+            ..xs = 12,
           GridItem(
               child: Container(
-                color: Colors.red,
-                height: 40,
-              ))
-              ..md = 1
-              ..sm = 4
-              ..xs = 12,
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            height: 40,
+          ))
+            ..md = 1
+            ..sm = 4
+            ..xs = 12,
           GridItem(
               child: Container(
-                color: Colors.amber,
-                height: 40,
-              ))
-              ..md = 1
-              ..sm = 12
-              ..xs = 12,
+            decoration: BoxDecoration(
+              color: Colors.amber,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            height: 40,
+          ))
+            ..md = 1
+            ..sm = 12
+            ..xs = 12,
           GridItem(
               child: Container(
-                color: Colors.indigoAccent,
-                height: 40,
-              ))
-              ..md = 1
-              ..sm = 12
-              ..xs = 12,
+            decoration: BoxDecoration(
+              color: Colors.indigoAccent,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            height: 40,
+          ))
+            ..md = 1
+            ..sm = 12
+            ..xs = 12,
           GridItem(
               child: Container(
-                color: Colors.pinkAccent,
-                height: 40,
-              ))
-              ..md = 1
-              ..sm = 12
-              ..xs = 12,
+            decoration: BoxDecoration(
+              color: Colors.pinkAccent,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            height: 40,
+          ))
+            ..md = 1
+            ..sm = 12
+            ..xs = 12,
           GridItem(
               child: Container(
-                color: Colors.limeAccent,
-                height: 40,
-              ))
-              ..md = 1
-              ..sm = 12
-              ..xs = 12,
+            decoration: BoxDecoration(
+              color: Colors.limeAccent,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            height: 40,
+          ))
+            ..md = 1
+            ..sm = 12
+            ..xs = 12,
           GridItem(
               child: Container(
-                color: Colors.teal,
-                height: 40,
-              ))
-              ..md = 1
-              ..sm = 12
-              ..xs = 12,
+            decoration: BoxDecoration(
+              color: Colors.teal,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            height: 40,
+          ))
+            ..md = 1
+            ..sm = 12
+            ..xs = 12,
           GridItem(
               child: Container(
-                color: Colors.purpleAccent,
-                height: 40,
-              ))
-              ..md = 1
-              ..sm = 12
-              ..xs = 12,
+            decoration: BoxDecoration(
+              color: Colors.purpleAccent,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            height: 40,
+          ))
+            ..md = 1
+            ..sm = 12
+            ..xs = 12,
           GridItem(
               child: Container(
-                color: Colors.red,
-                height: 40,
-              ))
-              ..md = 1
-              ..sm = 12
-              ..xs = 12,
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            height: 40,
+          ))
+            ..md = 1
+            ..sm = 12
+            ..xs = 12,
         ],
-      ),
+      )..gap = 2,
     );
   }
 }
