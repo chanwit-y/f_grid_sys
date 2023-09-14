@@ -22,6 +22,7 @@ class BreakPoint {
 class GridItem {
   Widget child;
   List<Widget> _colspans;
+  List<Widget> _rowspans;
 
   //move to use BreakPoint
   int _xs = 0;
@@ -30,8 +31,14 @@ class GridItem {
   int _lg = 0;
   int _xl = 0;
 
-  GridItem({this.child = const SizedBox(), List<Widget> colspans = const []})
-      : _colspans = colspans;
+  double _gapColspan = 0;
+
+  GridItem(
+      {this.child = const SizedBox(),
+      List<Widget> colspans = const [],
+      List<Widget> rowspans = const []})
+      : _colspans = colspans,
+        _rowspans = rowspans;
 
 // get function
   int get xs => _xs;
@@ -42,6 +49,14 @@ class GridItem {
 
   // get function colspan
   List<Widget> get colspans => _colspans;
+
+  // get function rowspan
+  List<Widget> get rowspans => _rowspans;
+
+  // set function rowspan
+  set rowspans(List<Widget> value) {
+    _rowspans = value;
+  }
 
   // set function xs
   set xs(int value) {
@@ -72,6 +87,14 @@ class GridItem {
   set colspan(List<Widget> value) {
     _colspans = value;
   }
+
+  //set function gapColspan
+  set gapColspan(double value) {
+    _gapColspan = value;
+  }
+
+  //get function gapColspan
+  double get gapColspan => _gapColspan;
 }
 
 class GridContrainer extends StatelessWidget {
@@ -79,7 +102,41 @@ class GridContrainer extends StatelessWidget {
   double _gapX = 0;
   double _gapY = 0;
 
+  CrossAxisAlignment _rowCrossAlign = CrossAxisAlignment.start;
+  MainAxisAlignment _rowMainAlign = MainAxisAlignment.start;
+
+  CrossAxisAlignment _colCrossAlign = CrossAxisAlignment.start;
+  MainAxisAlignment _colMainAlign = MainAxisAlignment.start;
+
   GridContrainer({super.key, required this.gridSys});
+
+  // get function colCrossAlign
+  CrossAxisAlignment get colCrossAlign => _colCrossAlign;
+  // set function colCrossAlign
+  set colCrossAlign(CrossAxisAlignment value) {
+    _colCrossAlign = value;
+  }
+
+  // get function colMainAlign
+  MainAxisAlignment get colMainAlign => _colMainAlign;
+  // set function colMainAlign
+  set colMainAlign(MainAxisAlignment value) {
+    _colMainAlign = value;
+  }
+
+  // get function rowCrossAlign
+  CrossAxisAlignment get rowcRossAlign => _rowCrossAlign;
+  // set function rowCrossAlign
+  set rowCrossAlign(CrossAxisAlignment value) {
+    _rowCrossAlign = value;
+  }
+
+  // get function rowMainAlign
+  MainAxisAlignment get rowMainAlign => _rowMainAlign;
+  // set function rowMainAlign
+  set rowMainAlign(MainAxisAlignment value) {
+    _rowMainAlign = value;
+  }
 
   // set function gapX
   set gapX(double value) {
@@ -120,6 +177,8 @@ class GridContrainer extends StatelessWidget {
         rows.add(_buildContainer(width, widthSizeBox, currentGrid));
       } else {
         columns.add(Row(
+          crossAxisAlignment: rowcRossAlign,
+          mainAxisAlignment: rowMainAlign,
           children: [...rows],
         ));
         rows.clear();
@@ -129,6 +188,8 @@ class GridContrainer extends StatelessWidget {
     }
 
     columns.add(Row(
+      crossAxisAlignment: rowcRossAlign,
+      mainAxisAlignment: rowMainAlign,
       children: [...rows],
     ));
 
@@ -147,11 +208,19 @@ class GridContrainer extends StatelessWidget {
       width: (width / 12) * widthSizeBox,
       child: currentGrid._colspans.isNotEmpty
           ? Column(
+              crossAxisAlignment: colCrossAlign,
+              mainAxisAlignment: colMainAlign,
               children: [
                 ...currentGrid._colspans,
               ],
             )
-          : currentGrid.child,
+          : currentGrid._rowspans.isNotEmpty
+              ? Row(
+                  children: [
+                    ...currentGrid._rowspans
+                  ],
+                )
+              : currentGrid.child,
     );
   }
 
