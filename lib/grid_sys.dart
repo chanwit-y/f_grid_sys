@@ -1,10 +1,3 @@
-// Extra small<576px
-// Small≥576px
-// Medium≥768px
-// Large≥992px
-// Extra large≥1200px
-// ignore_for_file: unnecessary_getters_setters, must_be_immutable
-
 import 'package:flutter/material.dart';
 
 enum BreakPointEnum { xs, sm, md, lg, xl }
@@ -31,6 +24,13 @@ class GridItem {
   int _lg = 0;
   int _xl = 0;
 
+//ถ้าจะซ่อน set beakpoint เป็น 0 หรือ ไม่ใส่ก็ได้
+  // bool _hXS = false;
+  // bool _hSM = false;
+  // bool _hMD = false;
+  // bool _hLG = false;
+  // bool _hXL = false;
+
   double _gapColspan = 0;
 
   GridItem(
@@ -39,6 +39,14 @@ class GridItem {
       List<Widget> rowspans = const []})
       : _colspans = colspans,
         _rowspans = rowspans;
+
+  //set function hXS
+  // set hXS(bool value) {
+  //   _hXS = value;
+  // }
+
+  // //get function hXS
+  // bool get hXS => _hXS;
 
 // get function
   int get xs => _xs;
@@ -103,39 +111,18 @@ class GridContrainer extends StatelessWidget {
   double _gapY = 0;
 
   CrossAxisAlignment _rowCrossAlign = CrossAxisAlignment.start;
-  MainAxisAlignment _rowMainAlign = MainAxisAlignment.start;
+  MainAxisAlignment rowMainAlign = MainAxisAlignment.start;
 
-  CrossAxisAlignment _colCrossAlign = CrossAxisAlignment.start;
-  MainAxisAlignment _colMainAlign = MainAxisAlignment.start;
+  CrossAxisAlignment colCrossAlign = CrossAxisAlignment.start;
+  MainAxisAlignment colMainAlign = MainAxisAlignment.start;
 
   GridContrainer({super.key, required this.gridSys});
-
-  // get function colCrossAlign
-  CrossAxisAlignment get colCrossAlign => _colCrossAlign;
-  // set function colCrossAlign
-  set colCrossAlign(CrossAxisAlignment value) {
-    _colCrossAlign = value;
-  }
-
-  // get function colMainAlign
-  MainAxisAlignment get colMainAlign => _colMainAlign;
-  // set function colMainAlign
-  set colMainAlign(MainAxisAlignment value) {
-    _colMainAlign = value;
-  }
 
   // get function rowCrossAlign
   CrossAxisAlignment get rowcRossAlign => _rowCrossAlign;
   // set function rowCrossAlign
   set rowCrossAlign(CrossAxisAlignment value) {
     _rowCrossAlign = value;
-  }
-
-  // get function rowMainAlign
-  MainAxisAlignment get rowMainAlign => _rowMainAlign;
-  // set function rowMainAlign
-  set rowMainAlign(MainAxisAlignment value) {
-    _rowMainAlign = value;
   }
 
   // set function gapX
@@ -198,6 +185,9 @@ class GridContrainer extends StatelessWidget {
 
   Container _buildContainer(
       double width, int widthSizeBox, GridItem currentGrid) {
+
+
+
     return Container(
       padding: EdgeInsets.only(
         left: _gapX,
@@ -216,13 +206,13 @@ class GridContrainer extends StatelessWidget {
             )
           : currentGrid._rowspans.isNotEmpty
               ? Row(
-                  children: [
-                    ...currentGrid._rowspans
-                  ],
+                  children: [...currentGrid._rowspans],
                 )
               : currentGrid.child,
     );
   }
+
+  
 
   //function to check size of the screen from grid item return BreakPointEnum
   int _getSizeOfScreen(double size, GridItem gridItem) {
