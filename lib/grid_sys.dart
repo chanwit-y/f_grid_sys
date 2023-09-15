@@ -105,13 +105,27 @@ class GridItem {
   double get gapColspan => _gapColspan;
 }
 
+const CrossAxisAlignment crossStart = CrossAxisAlignment.start;
+const CrossAxisAlignment crossCenter = CrossAxisAlignment.center;
+const CrossAxisAlignment crossEnd = CrossAxisAlignment.end;
+const CrossAxisAlignment crossBaseline = CrossAxisAlignment.baseline;
+const CrossAxisAlignment crossStretch = CrossAxisAlignment.stretch;
+
+// const MainAxisAlignment mainStart = MainAxisAlignment.start;
+// const MainAxisAlignment mainCenter = MainAxisAlignment.center;
+const MainAxisAlignment mainStart = MainAxisAlignment.start;
+const MainAxisAlignment mainCenter = MainAxisAlignment.center;
+const MainAxisAlignment mainEnd = MainAxisAlignment.end;
+// const MainAxisAlignment crossBaseline = MainAxisAlignment.baseline;
+// const MainAxisAlignment crossStretch = MainAxisAlignment.stretch;
+
 class GridContrainer extends StatelessWidget {
   List<GridItem> gridSys;
   double _gapX = 0;
   double _gapY = 0;
 
-  CrossAxisAlignment _rowCrossAlign = CrossAxisAlignment.start;
-  MainAxisAlignment rowMainAlign = MainAxisAlignment.start;
+  CrossAxisAlignment _rowCrossAlign = crossStart;
+  MainAxisAlignment rowMainAlign = mainStart;
 
   CrossAxisAlignment colCrossAlign = CrossAxisAlignment.start;
   MainAxisAlignment colMainAlign = MainAxisAlignment.start;
@@ -185,9 +199,6 @@ class GridContrainer extends StatelessWidget {
 
   Container _buildContainer(
       double width, int widthSizeBox, GridItem currentGrid) {
-
-
-
     return Container(
       padding: EdgeInsets.only(
         left: _gapX,
@@ -211,8 +222,6 @@ class GridContrainer extends StatelessWidget {
               : currentGrid.child,
     );
   }
-
-  
 
   //function to check size of the screen from grid item return BreakPointEnum
   int _getSizeOfScreen(double size, GridItem gridItem) {
